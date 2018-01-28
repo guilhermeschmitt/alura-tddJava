@@ -1,6 +1,8 @@
 package br.com.caelum.leilao.dominios;
 
 import static org.junit.Assert.assertEquals;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -67,7 +69,7 @@ public class AvaliadorTest {
 		assertEquals(((300.0+250.0+490.0)/3), leiloeiro.getLanceMedio() , 0.0001);
 	}
 	
-	@Test
+	
 	public void calculaLanceSemLance() {
         leiloeiro.calculaLanceMedio(leilao);
         assertEquals(0.0, leiloeiro.getLanceMedio(), 0.0001);
@@ -84,9 +86,11 @@ public class AvaliadorTest {
 				
 		leiloeiro.avalia(leilao);
 		assertEquals(3, leiloeiro.getTresMaiores().size());
-		assertEquals(900.0, leiloeiro.getTresMaiores().get(0).getValor(), 0.0001);
-		assertEquals(800.0, leiloeiro.getTresMaiores().get(1).getValor(), 0.0001);
-		assertEquals(490.0, leiloeiro.getTresMaiores().get(2).getValor(), 0.0001);
+		assertThat(leiloeiro.getTresMaiores(), hasItems(
+				new Lance(joao,  900.0),
+				new Lance(gabriel, 800.0),
+				new Lance(gabriel, 490.0)));
+
 	}
 	
 	@Test
@@ -100,10 +104,10 @@ public class AvaliadorTest {
 		assertEquals(250.0, leiloeiro.getTresMaiores().get(1).getValor(), 0.0001);
 	}
 	
-	@Test
+	@Test(expected=RuntimeException.class)
 	public void pegaTresMaioresComNenhumLance() {	
 		leiloeiro.avalia(leilao);
-        assertEquals(0, leiloeiro.getTresMaiores().size());
+        //assertEquals(0, leiloeiro.getTresMaiores().size());
 	}
 	
 }

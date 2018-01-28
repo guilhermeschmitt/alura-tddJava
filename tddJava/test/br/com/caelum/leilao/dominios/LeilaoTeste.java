@@ -1,6 +1,7 @@
 package br.com.caelum.leilao.dominios;
 
-import static org.junit.Assert.assertEquals;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -30,8 +31,9 @@ public class LeilaoTeste {
 				.lance(steveJobs, 3000.0)
 				.constroi();
 		
-        assertEquals(1, leilao.getLances().size());
-        assertEquals(2000, leilao.getLances().get(0).getValor(), 0.00001);
+		
+		assertThat(leilao.getLances().size(), equalTo(1));
+        assertThat(leilao.getLances().get(0).getValor(), equalTo(2000.0));
     
 	}
 	
@@ -52,8 +54,8 @@ public class LeilaoTeste {
 					.lance(steveJobs, 12000.0)
 					.constroi();
      
-        assertEquals(10, leilao.getLances().size());
-        assertEquals(11000, leilao.getLances().get(9).getValor(), 0.00001);
+        assertThat(leilao.getLances().size(), equalTo(10));
+        assertThat(leilao.getLances().get(9).getValor(), equalTo(11000.0));
     
 	}
 	
@@ -65,8 +67,8 @@ public class LeilaoTeste {
 					.dobraLanceDo(steveJobs)
 					.constroi();
 
-        assertEquals(3, leilao.getLances().size());
-        assertEquals(4000.0, leilao.getLances().get(2).getValor(), 0.00001);
+        assertThat(leilao.getLances().size(), equalTo(3));
+        assertThat(leilao.getLances().get(2).getValor(), equalTo(4000.0));
 	}
 	
 	@Test
@@ -76,7 +78,7 @@ public class LeilaoTeste {
 					.dobraLanceDo(steveJobs)
 					.constroi();
 		
-        assertEquals(1, leilao.getLances().size());
+        assertThat(leilao.getLances().size(), equalTo(1));
         
 	}
 	
@@ -97,8 +99,8 @@ public class LeilaoTeste {
 				.dobraLanceDo(steveJobs)
 				.constroi();
 
-        assertEquals(10, leilao.getLances().size());
-        assertEquals(11000, leilao.getLances().get(9).getValor(), 0.00001);
+        assertThat(leilao.getLances().size(), equalTo(10));
+        assertThat(leilao.getLances().get(9).getValor(), equalTo(11000.0));
     
 	}
 	
@@ -109,8 +111,8 @@ public class LeilaoTeste {
 					.dobraLanceDo(steveJobs)
 					.constroi();
 
-        assertEquals(1, leilao.getLances().size());
-        assertEquals(2000, leilao.getLances().get(0).getValor(), 0.00001);
+        assertThat(leilao.getLances().size(), equalTo(1));
+        assertThat(leilao.getLances().get(0).getValor(), equalTo(2000.0));
     
 	}
 	
